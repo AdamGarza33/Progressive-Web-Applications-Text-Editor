@@ -24,9 +24,9 @@ module.exports = () => {
       }),
       new WebpackPwaManifest({
         name: 'Your Text Editor App',
-        short_name: 'Text editor',
+        short_name: 'Text Editor',
         description: 'A text editor app built with PWA.',
-        background_color: "#ffffff",
+        background_color: '#ffffff',
         theme_color: '#2196f3',
         start_url: '/',
         icons: [
@@ -35,15 +35,16 @@ module.exports = () => {
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
-          }
-        ]
-      })
+        ],
+      }),
+      new InjectManifest({
+        swSrc: './src/service-worker.js',
+        swDest: 'service-worker.js',
+      }),
     ],
 
     module: {
-      rules: [
-        
-      ],
+      rules: [],
     },
   };
 };

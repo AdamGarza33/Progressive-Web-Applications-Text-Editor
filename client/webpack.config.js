@@ -18,7 +18,26 @@ module.exports = () => {
       path: path.resolve(__dirname, 'dist'),
     },
     plugins: [
-      
+      new HtmlWebpackPlugin({
+        template: './src/index.html',
+        chunks: ['main'],
+      }),
+      new WebpackPwaManifest({
+        name: 'Your Text Editor App',
+        short_name: 'Text editor',
+        description: 'A text editor app built with PWA.',
+        background_color: "#ffffff",
+        theme_color: '#2196f3',
+        start_url: '/',
+        icons: [
+          {
+            src: path.resolve('src/images/icon.png'),
+            sizes: [96, 128, 192, 256, 384, 512],
+            destination: path.join('assets', 'icons'),
+          },
+          }
+        ]
+      })
     ],
 
     module: {

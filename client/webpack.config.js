@@ -19,27 +19,30 @@ module.exports = () => {
     },
     plugins: [
       new HtmlWebpackPlugin({
-        template: './src/index.html',
-        chunks: ['main'],
+        template: './index.html',
+        title: 'Jate',
       }),
       new WebpackPwaManifest({
+        fingerprints: false,
+        inject: true,
         name: 'Your Text Editor App',
         short_name: 'Text Editor',
         description: 'A text editor app built with PWA.',
         background_color: '#ffffff',
         theme_color: '#2196f3',
-        start_url: '/',
+        start_url: './',
+        publicPath: './',
         icons: [
           {
-            src: path.resolve('src/images/icon.png'),
+            src: path.resolve('src/images/logo.png'),
             sizes: [96, 128, 192, 256, 384, 512],
             destination: path.join('assets', 'icons'),
           },
         ],
       }),
       new InjectManifest({
-        swSrc: './src/service-worker.js',
-        swDest: 'service-worker.js',
+        swSrc: './src-sw.js',
+        swDest: 'src-sw.js',
       }),
     ],
 
@@ -50,13 +53,13 @@ module.exports = () => {
           use: ['style-loader', 'css-loader'],
         },
         {
-          test: /\.css$/,
+          test: /\.m?js$/,
           exclude: /node_modules/,
           use: {
             loader: 'babel-loader',
             options: {
               presets: ['@babel/preset-env'],
-              plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime',],
+              // plugins: ['@babel/plugin-proposal-object-rest-spread', '@babel/transform-runtime',],
             }
           }
         }
